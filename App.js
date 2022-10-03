@@ -11,6 +11,8 @@ import {useSelector} from 'react-redux';
 import Profile from './pages/Profile';
 import Cart from './pages/Cart';
 import ProtectedRoutes from './ProtectedRoutes';
+import Payment from './pages/Payment';
+import PasswordChange from './pages/PasswordChange';
   
 function App() {
     const mystate = useSelector((state) => state.changeLoginStatus);
@@ -20,7 +22,7 @@ function App() {
       <Navbar />
       <Routes>
               <Route path='/about' exact element={<About/>} />
-              <Route path='/home' exact element={<Home />} />
+              <Route path='/home' index exact element={<Home />} />
               <Route path='/' exact element={<Home />} />
               <Route path='/sign-in' exact  element={<SignIn/>} />
               <Route path='/sign-up' exact  element={<SignUp />} />
@@ -28,9 +30,12 @@ function App() {
               < Route path='/sign-in' exact  element={<SignIn />} />
               < Route path='/sign-up' exact  element={<SignUp />} />
               < Route path='/profile' exact element={<ProtectedRoutes Components={Profile} />} />
-              < Route path='/cart' exact element={<ProtectedRoutes Components={Cart}/>} />
+              < Route path='/cart' exact element={<ProtectedRoutes Components={Cart} />} />
+              < Route path='/payment' exact element={<ProtectedRoutes Components={Payment} />} />
+              < Route path='/password' exact element={<ProtectedRoutes Components={PasswordChange} />} />
       </Routes>
-    </Router>
+      </Router>
+     
   );
 }
   

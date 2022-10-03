@@ -1,6 +1,11 @@
 b{
     float:left;
 }
-.userbutton {
-    float: left;
+img{
+    height:73px;
+}
+body{
+    margin:0;
+    padding:0;
+    background:#000000;
 }

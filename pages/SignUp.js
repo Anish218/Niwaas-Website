@@ -1,14 +1,16 @@
 import React, { useState,useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import logo from "../Components/Navbar/logo.png";
 
 
 
 import './SignUp.css';
-import { validEmail, validPassword, validName } from '../Regex.js';
+import { validEmail, validPassword, validUserName } from '../Regex.js';
   
 const SignUp = () => {
     const navigate = useNavigate();
+    const emailverify = /\S+@\S+\.\S+/;
     let [data, setData] = useState({
         name: "",
         email: "",
@@ -24,28 +26,39 @@ const SignUp = () => {
     const [nameError, setNameError] = useState(false);
     const [numberErr, setNumberErr] = useState(false);
     const validate = () => {
-        if (!validEmail.test(data.email)) {
+        if (!emailverify.test(data.email)) {
 
             setEmailErr(true);
+            console.log("email");
 
         }
+        else
+            setEmailErr(false);
+
+        if (!validUserName.test(data.username)) {
+            setUserNameErr(true);
+        }
+        else
+            setUserNameErr(false);
         if (!validPassword.test(data.password)) {
             setPwdError(true);
         }
+        else
+            setPwdError(false);
         if (data.name.length == 0 || containsNumbers(data.name)) {
             setNameError(true);
         }
+        else
+            setNameError(false);
 
         if (data.mobileNumber.length !== 10) {
             setNumberErr(true);
         }
+        else
+            setNumberErr(false);
 
 
     };
-    console.log(errorCount);
-    if ((emailErr && passworddError) || (emailErr && nameError) || (emailErr && numberErr)
-        || (passworddError && nameError) || (passworddError && numberErr) || (nameError && numberErr))
-        document.getElementById('signupdiv').style.height = '600px';
     
        
 
@@ -91,37 +104,39 @@ const SignUp = () => {
     const addDataToServer = (cred) => {
 
         console.log(cred);
+        if (data.name.length != 0 && !containsNumbers(data.name)
+            && data.email != "" && emailverify.test(data.email) && data.mobileNumber != ""
+            && data.password != "" && validPassword.test(data.password) && data.username != "" && validUserName.test(data.username)) {
+            axios.post("http://localhost:8081/api/auth/signup", cred).then(
 
-        axios.post("http://localhost:8081/api/auth/signup", cred).then(
-
-            (response) => {
+                (response) => {
 
 
 
-                console.log(response);
+                    console.log(response);
 
-                alert("user signed in Successfully");
+                    alert("user signed in Successfully");
 
-                    if (response.status==200) {
+                    if (response.status == 200) {
                         console.log("navigating");
                         navigate('/sign-in');
                     }
 
-            }, (error) => {
+                }, (error) => {
 
-                console.log(error);
+                    console.log(error);
 
-                alert("Operation failed");
+                    alert("Operation failed");
 
-            }
+                }
 
-        );
+            );
+        }
 
     }
 
     function signdUser(e) {
         //e.preventDefault();
-        document.getElementById('signupdiv').style.height = '520px';
        //setEmailErr(false);
         //setNameError(false);
         //setNumberErr(false);
@@ -142,37 +157,48 @@ const SignUp = () => {
 
         return (<>
             <div id="signupdiv">
-                <h1>Sign Up Page</h1>
-                <p><strong>Enter Your Name</strong></p>
 
-                <input id="name" type="text" onChange={handleInputChanges} type="text" required>
-                </input>
-                {nameError && (<><p className="error">*Please provide valid Name!</p></>)}
-                <p><strong>Enter Your Mobile Number</strong></p>
+                <h1>Sign Up</h1>
+                <table cellSpacing="15">
+                    <tr><td className="headingforsignupdiv">Enter Your Name</td>
 
-                <input id="mobileNumber" type="number" onChange={handleInputChanges} required type="text">
+               <td> <input placeholder="Enter Your Name"id="name" type="text" onChange={handleInputChanges} type="text" required>
                 </input>
-                {numberErr && (<><p className="error">*Please provide valid Mobile Number!</p></>)}
-                <p><strong>Enter Your Email</strong></p>
+                            {nameError && (<><p className="error">*Please provide valid Name!</p></>)}</td>
+                        </tr>
+                    <tr><td className="headingforsignupdiv">Enter Your Mobile Number</td>
 
-                <input id="email" type="email" onChange={handleInputChanges} required type="text">
+                        <td><input placeholder="Enter Your Number" id="mobileNumber" type="number" onChange={handleInputChanges} required type="text">
                 </input>
-                <p><strong>Enter Your UserName</strong></p>
+                            {numberErr && (<><p className="error">*Please provide valid Mobile Number!</p></>)}</td>
+                        </tr>
+                    <tr><td className="headingforsignupdiv">Enter Your Email</td>
 
-                <input id="username" type="text" onChange={handleInputChanges} required>
-                </input>
+                        <td> <input placeholder="Enter Your Email" id="email" type="email" onChange={handleInputChanges} required type="text">
+                        </input>{emailErr && (<><p className="error">*Please provide valid Email!</p></>)}</td>
+                    </tr>
+                    <tr>
+                        <td className="headingforsignupdiv" >Enter Your UserName</td>
+
+                        <td> <input placeholder="Enter Your UserName" id="username" type="text" onChange={handleInputChanges} required>
+                        </input>{usernameErr && (<><p className="error">*Please provide valid UserName!</p></>)}</td>
+                        </tr>
          
-                <p><strong>Enter Your Password</strong></p>
+                    <tr><td className="headingforsignupdiv">Enter Your Password</td>
 
-                <input id="password" onChange={handleInputChanges} required type="password">
-                </input>
-
-                {passworddError && (<><p className="error">*Please provide valid Password!</p></>)}
-
-                <br />
+                        <td> <input placeholder="Enter Your Password" id="password" onChange={handleInputChanges} required type="password">
+                </input>{passworddError && (<><p className="error">*Please provide valid Password!</p></>)}</td>
+                        </tr>
+                    </table>
 
 
                 <button onClick={signdUser}>Sign Up</button></div>
+            <footer>
+                <div className="logoDiv">
+                    <img onClick={() => navigate('/home')} src={logo} alt="logo"></img>
+                    <p id="copyright">CopyRight @2022</p>
+                </div>
+            </footer>
 
         </>);
     

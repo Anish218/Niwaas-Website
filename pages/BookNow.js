@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Select from 'react-select'
 import './BookNow.css';
+import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import ProtectedRoutes from '../ProtectedRoutes';
@@ -101,10 +102,13 @@ const BookNow = () => {
             }))
         }
         if (e.target.id === "checkinDate") {
+            console.log(e.target.value);
             setData(existingValues => ({
                 ...existingValues,
                 checkinDate: e.target.value,
             }))
+            console.log(data.checkinDate);
+
         }
         if (e.target.id === "checkoutDate") {
             setData(existingValues => ({
@@ -119,10 +123,59 @@ const BookNow = () => {
             }))
         }
     }
-    const addBookToCart=()=>{
-        if (mystate.userStatus && mystate.accessToken != "null" && mystate.userid != -1 && noErr)
-            navigate('/cart');
-        else if (noErr)
+    const addBookToCart = () => {
+        if (mystate.userStatus && mystate.accessToken != "null" && mystate.userid != -1 && data.checkinDate !== ""
+            && data.checkoutDate !== "" && data.name.length !== 0 && !containsNumbers(data.name)
+            && data.mobileNumber.length == 10 && data.city !== "" && data.roomInfo.roomType !== "") {
+            var date1 = new Date(data.checkinDate); 
+            var date2 = new Date(data.checkoutDate); 
+            var noOfDays = date2.getTime() - date1.getTime();
+
+            // To calculate the no. of days between two dates
+            var noOfDays = noOfDays / (1000 * 3600 * 24);
+            console.log(noOfDays);
+           // console.log(date);
+            let sending = {
+                name: data.name,
+                mobilenumber: data.mobileNumber,
+                checkInDate: data.checkinDate,
+                checkOutDate: data.checkoutDate,
+                city: data.city,
+                roomtype: data.roomInfo.roomType,
+                userid: mystate.userid,
+                price: noOfDays * data.roomInfo.price
+                
+            }
+            axios.post("http://localhost:8081/api/auth/addBookings", sending).then(
+
+                (response) => {
+
+
+
+                    console.log(response.data);
+
+                    alert("You have Booked your Stay");
+
+                    if (response.status == 200) {
+                        //dispatch(changingStatus(true, response.data.id, response.data.name, response.data.accessToken));
+                        console.log("navigating");
+                        navigate('/cart');
+                    }
+
+                }, (error) => {
+
+                    console.log(error);
+
+                    alert("No Booking Done");
+
+                }
+
+            );
+            
+        }
+        else if (data.checkinDate !== ""
+            && data.checkoutDate !== "" && data.name.length !== 0 && !containsNumbers(data.name)
+            && data.mobileNumber.length == 10 && data.city !== "" && data.roomInfo.roomType !== "")
             navigate('/sign-in');
         else {}
 
@@ -169,15 +222,12 @@ const BookNow = () => {
             setSelectRoomError(false);
 
     };
-    if (!nameError && !numberErr && !checkOutDateErr && !checkInDateErr && !selectError && !selectRoomError) {
-        console.log("inside error");
-        addBookToCart();
-    }
+    console.log(nameError);
     const bookRoom = (e) => {
 
         validate()
         console.log("after validate");
-        //addBookToCart();
+        addBookToCart();
 
 
 
@@ -190,36 +240,58 @@ const BookNow = () => {
     return (
         <div id="bookNowid" >
 
-                <h1>Book Now Page</h1>
-                <p><strong>Enter Your Name</strong></p>
+            <h1>Book Now</h1>
+            <table cellSpacing="15">
 
-                <input id="name"  onChange={(e)=>handleInputChanges(e)} type="text" required>
-            </input>
-            {nameError && (<><p className="error">*Please provide valid Name!</p></>)}
-            <p><strong>Enter Your Mobile Number</strong></p>
+                <tr>
+                    <td className="headinforbooknow">Enter Your Name</td>
 
-            <input id="mobileNumber" type="number" onChange={(e)=>handleInputChanges(e)} required type="text">
-            </input>
-            {numberErr && (<><p className="error">*Please provide valid Number!</p></>)}
+                    <td><input id="name" placeholder="Enter Your Name" onChange={(e) => handleInputChanges(e)} type="text" required>
+                    </input>
+             
+                   {nameError && (<><p className="error">*Please provide valid Name!</p></>)}</td>
+                    </tr>
 
-            <Select id="selectCity"  placeholder="Select City" options={cityList} onChange={(e)=>handleCityChanges(e)}>City</Select>
-            {selectError && (<><p className="error">*Please provide valid City!</p></>)}
-            <Select id="selectRoom" placeholder="Select Room"  options={roomList} onChange={(e)=>handleRoomChanges(e)}>Rooms</Select>
-            {selectRoomError && (<><p className="error">*Please provide valid Room!</p></>)}
 
-                <p><strong>Enter Your CheckIn Date</strong></p>
+                <tr><td className="headinforbooknow">Enter Your Mobile Number</td>
 
-                <input id="checkinDate" onChange={(e)=>handleInputChanges(e)} type="date" required>
-            </input>
-            {checkInDateErr && (<><p className="error">*Please provide valid Check In Date!</p></>)}
-            <p><strong>Enter Your CheckOut Date</strong></p>
+                    <td><input placeholder="Enter Your Mobile Number" id="mobileNumber" type="number" onChange={(e) => handleInputChanges(e)} required type="text">
+                    </input>
+                
+                        {numberErr && (<><p className="error">*Please provide valid Number!</p></>)}
+                        </td>
+                    </tr>
 
-            <input id="checkoutDate" onChange={(e)=>handleInputChanges(e)} type="date" required>
-            </input>
-            {checkOutDateErr && (<><p className="error">*Please provide valid Check Out Date!</p></>)}
 
-            <br />
-            <button onClick={(e)=>bookRoom(e)}>Book Now</button>
+
+                <tr><td className="headinforbooknow">Enter Booking Branch</td>
+                        <td><Select id="selectCity" placeholder="Select City" options={cityList} onChange={(e) => handleCityChanges(e)}>City</Select>
+                        {selectError && (<><p className="error">*Please provide valid City!</p></>)}</td>
+                    </tr>
+
+                <tr><td className="headinforbooknow">Enter Room Type</td>
+                    <td> <Select id="selectRoom" placeholder="Select Room" options={roomList} onChange={(e) => handleRoomChanges(e)}>Rooms</Select>
+                    {selectRoomError && (<><p className="error">*Please provide valid Room!</p></>)}</td>
+                    </tr>
+
+
+                <tr><td className="headinforbooknow">Enter Your CheckIn Date</td>
+
+                    <td><input placeholder="Enter Your Check-In Date" id="checkinDate" onChange={(e) => handleInputChanges(e)} type="date" required>
+                    </input>
+                       {checkInDateErr && (<><p className="error">*Please provide valid Check In Date!</p></>)}</td>
+                    </tr>
+
+                <tr><td className="headinforbooknow">Enter Your CheckOut Date</td>
+
+                    <td><input placeholder="Enter Your Check-Out Date" id="checkoutDate" onChange={(e) => handleInputChanges(e)} type="date" required>
+                    </input>
+                     {checkOutDateErr && (<><p className="error">*Please provide valid Check Out Date!</p></>)}</td>
+                    </tr>
+
+
+               <tr> <td><button onClick={(e) => bookRoom(e)}>BookNow</button></td></tr>
+            </table>
 
 
         </div>

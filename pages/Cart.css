@@ -1,0 +1,37 @@
+.cartdisplaydiv {
+    width:100%;
+    top:20%;
+    left:15%;
+    position:absolute;
+    background-color:black;
+    height:auto;
+}
+table,tr,td{
+    border:1px solid black;
+    border:none;
+    color:white;
+}
+td #cancel{
+    margin-top:-50px;
+    width:125%;
+    margin-left:-10px;
+}
+td{
+    padding:0 15px;
+}
+.heading td{
+    color:red;
+    font-size:large;
+}
+.checkout{
+    margin-left:1.5%;
+    text-align:center;
+
+    width:5%;
+    background-color:red;
+}
+#emptymessage{
+    top:60%;
+    left:15%;
+    position:absolute;
+}

@@ -1,0 +1,28 @@
+h1{
+    color:red;
+}
+.qrcode {
+    width: 100%;
+    top: 20%;
+    left: 40%;
+    position: absolute;
+    background-color: black;
+    height: auto;
+}
+table, tr, td {
+    border: 1px solid black;
+    border: none;
+    color: white;
+}
+td {
+    padding: 0 15px;
+    font-size: larger
+}
+.paymentheading{
+    color: white;
+    font-size: large;
+}
+.note{
+    color:red;
+    margin-left:300px;
+}

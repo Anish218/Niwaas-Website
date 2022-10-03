@@ -8,21 +8,23 @@ import {
     NavBtn,
     NavBtnLink
 } from './NavbarElements';
-import logo from './niwaaslogo.jpg';
-import { useSelector } from 'react-redux';
-  
+import logo from './logo.png';
+import { changingStatus } from "../../Action/index";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+
     const mystate = useSelector((state) => state.changeLoginStatus);
+    const dispatch = useDispatch();
+    const navigate = useNavigate(); 
   return (
     <>
       <Nav>
               <Bars />
-              <img src={logo} alt="logo"></img>
-        <NavLink to='/home'>
-            <b>NIWAAS</b>
-              </NavLink>
+              <img onClick={()=> navigate('/home')} src={logo} alt="logo"></img>
 
               <NavMenu>
+                 
                   <NavLink to='/home' activeStyle>
                       Home
                   </NavLink>
@@ -32,6 +34,10 @@ const Navbar = () => {
                   <NavLink to='/book-now' activeStyle>
                       BookNow
                   </NavLink>
+                  {mystate.userStatus && (<NavLink to='/cart' activeStyle>
+                      Cart
+                  </NavLink>)}
+                  {mystate.userStatus && (< NavBtn onClick={() => dispatch(changingStatus(false, -1, "null", "null"))}>LogOut</NavBtn>)}
                   {!mystate.userStatus && ( <NavLink to='/sign-in' activeStyle>
                       Sign In
                   </NavLink>)}
@@ -42,7 +48,11 @@ const Navbar = () => {
           {/* Second Nav */}
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>
-      </Nav>
+          </Nav>
+          <body>
+            
+          </body>
+          
     </>
   );
 };

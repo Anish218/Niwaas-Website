@@ -4,6 +4,7 @@ import { validUserName, validPassword } from '../Regex.js';
 import { useSelector, useDispatch } from "react-redux";
 import { changingStatus } from "../Action/index";
 import { useNavigate } from "react-router-dom";
+import logo from "../Components/Navbar/logo.png";
 import axios from 'axios';
 
 const SignIn = () => {
@@ -60,31 +61,34 @@ const SignIn = () => {
 
         console.log(cred);
 
-        axios.post("http://localhost:8081/api/auth/signin", cred).then(
+        if (data.username != "" && data.password != "" &&
+            validPassword.test(data.password) && validUserName.test(data.username)) {
+            axios.post("http://localhost:8081/api/auth/signin", cred).then(
 
-            (response) => {
+                (response) => {
 
 
 
-                console.log(response.data);
+                    console.log(response.data);
 
-                alert("You have Signed In successfully!");
+                    alert("You have Signed In successfully!");
 
-                if (response.status == 200) {
-                    dispatch(changingStatus(true, response.data.id, response.data.name, response.data.accessToken));
-                    console.log("navigating");
-                    navigate('/home');
+                    if (response.status == 200) {
+                        dispatch(changingStatus(true, response.data.id, response.data.name, response.data.accessToken));
+                        console.log("navigating");
+                        navigate('/home');
+                    }
+
+                }, (error) => {
+
+                    console.log(error);
+
+                    alert("Please Provide Vlaid Credential!");
+
                 }
 
-            }, (error) => {
-
-                console.log(error);
-
-                alert("Please Provide Vlaid Credential!");
-
-            }
-
-        );
+            );
+        }
 
     }
 
@@ -97,26 +101,42 @@ const SignIn = () => {
 
     }
 
-    return (
+    return (<>
         <div id="signinId" >
 
-                <h1>SignIn Page</h1>
-                <p><strong>Enter Your User Name</strong></p>
+            <h1>SignIn</h1>
+            <table cellSpacing="25">
+                <tr>
+                    <td className="headinforsignin">Enter Your User Name</td>
 
-                <input id="username" type="text" onChange={handleInputChanges} required>
-            </input>
-            {usernameErr && (<><p className="error">*Please provide valid User Name!</p></>)}
+                    <td><input placeholder="Enter Your User Name" id="username" type="text" onChange={handleInputChanges} required>
+                    </input>
+                        {usernameErr && (<><p className="error">*Please provide valid User Name!</p></>)}</td>
+                    </tr>
 
 
-                <p><strong>Enter Your Password</strong></p>
+                <tr>
+                    <td className="headinforsignin">Enter Your Password</td>
 
-                <input id="password" onChange={handleInputChanges} type="password" required>
-            </input>
-            {passworddError && (<><p className="error">*Please provide valid Password!</p></>)}
+               <td> <input  placeholder="Enter Your Password"id="password" onChange={handleInputChanges} type="password" required>
+                    </input>
+                   
+                  {passworddError && (<><p className="error">*Please provide valid Password!</p></>)}
+                    </td>
+                    </tr>
 
-                <br />
-            <button onClick={checkWhetherAuthenticUser}>Sign In</button>
+               
+                </table>
+                <button onClick={checkWhetherAuthenticUser}>Sign In</button>
+            
         </div>
+        <footer>
+                    <div className="logoDiv">
+                        <img onClick={() => navigate('/home')} src={logo} alt="logo"></img>
+                        <p id="copyright">CopyRight @2022</p>
+                    </div>
+        </footer>
+        </>
 
 
     );
