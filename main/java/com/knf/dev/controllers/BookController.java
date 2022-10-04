@@ -44,4 +44,19 @@ public class BookController {
         return ResponseEntity.ok(new MessageResponse("Booking deleted successfully!"));
         //return new ResponseEntity<List<Product>> productRepository.getById(fetchProduct.getUserid());
     }
+    @GetMapping("/bookingdetails/{id}")
+    public ResponseEntity<?> getBookingPrice(@PathVariable(value = "id") Long id)
+    {
+        Product product = productRepository.getBookingsById(id);
+        System.out.println(product);
+        if(product == null) {
+            return ResponseEntity.notFound().build();
+        }
+        else{
+            System.out.println("yes");
+            return ResponseEntity.ok().body(product);
+        }
+
+        //return new ResponseEntity<List<Product>> productRepository.getById(fetchProduct.getUserid());
+    }
 }

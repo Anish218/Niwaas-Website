@@ -14,6 +14,9 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query("FROM Product p WHERE p.userid =?1")
     List<Product> getBookingsByUserId(Long userid);
+    @Query("FROM Product p WHERE p.id =?1")
+    Product getBookingsById(Long id);
+
     @Modifying
     @Transactional
     @Query(value="DELETE FROM Product p where p.id=?1",nativeQuery = true)
