@@ -1,0 +1,51 @@
+.cartdisplaydiv {
+    width: 100%;
+    margin: 10px 20px 0px 10px;
+    position: absolute;
+    background-color: black;
+    height: auto;
+}
+
+    .cartdisplaydiv table, tr, td {
+        border: 1px solid black;
+    }
+
+        td #cancel {
+            margin-top: -50px;
+            width: 125%;
+            margin-left: -10px;
+        }
+
+.valuescart td {
+    padding: 0 15px;
+    color: white;
+}
+.headingcart{
+    background-color:#808080;
+}
+.headingcart td {
+    color: red;
+    font-size: large;
+    font-weight: bold;
+}
+
+td #viewdetails {
+    text-align: center;
+    margin-right: 10px;
+    margin-left: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+    background-color: wheat;
+    color:black;
+}
+#viewdetails:hover {
+    background-color: white;
+    border-color: black;
+    box-shadow: 0 0 10px #FFFFFF;
+}
+
+#emptymessage {
+    top: 60%;
+    left: 15%;
+    position: absolute;
+}

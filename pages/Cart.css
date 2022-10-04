@@ -1,34 +1,42 @@
 .cartdisplaydiv {
     width:100%;
-    top:20%;
-    left:15%;
+    margin:10px 20px 0px 10px;
     position:absolute;
-    background-color:black;
+    background-color:white;
     height:auto;
 }
-table,tr,td{
+.cartdisplaydiv table,tr,td{
     border:1px solid black;
-    border:none;
-    color:white;
+    
 }
 td #cancel{
     margin-top:-50px;
     width:125%;
     margin-left:-10px;
+   
 }
-td{
+#cancel:hover {
+    background-color: red;
+    border-color: black;
+    box-shadow: 0 0 10px red;
+}
+.valuescart td{
     padding:0 15px;
+   color:black;
 }
-.heading td{
-    color:red;
+.headingcart td{
+    color:black;
     font-size:large;
+    font-weight:bold;
 }
-.checkout{
-    margin-left:1.5%;
-    text-align:center;
-
-    width:5%;
-    background-color:red;
+td #payandbook {
+    text-align: center;
+    margin-right: 10px;
+    margin-left: 5px;
+    margin-bottom: 20px;
+    width:100%;
+    background-color: wheat;
+    color:black;
 }
 #emptymessage{
     top:60%;

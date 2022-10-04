@@ -3,26 +3,35 @@ h1{
 }
 .qrcode {
     width: 100%;
-    top: 20%;
-    left: 40%;
     position: absolute;
     background-color: black;
     height: auto;
 }
-table, tr, td {
-    border: 1px solid black;
-    border: none;
-    color: white;
+
+.paymentinfo {
+    width:100%;
+    padding-left:400px;
+    background-color:black;
+ 
 }
 td {
     padding: 0 15px;
-    font-size: larger
+    font-size: larger;
+    font-weight:bold;
+    color:white;
 }
 .paymentheading{
     color: white;
     font-size: large;
+    font-weight:bolder;
 }
 .note{
     color:red;
     margin-left:300px;
+}
+#submit {
+    margin-left: 2.5%;
+    text-align: center;
+    width: 40%;
+    background-color: black;
 }

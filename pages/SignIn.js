@@ -74,7 +74,7 @@ const SignIn = () => {
                     alert("You have Signed In successfully!");
 
                     if (response.status == 200) {
-                        dispatch(changingStatus(true, response.data.id, response.data.name, response.data.accessToken));
+                        dispatch(changingStatus(true, response.data.id, response.data.name,response.data.accessToken));
                         console.log("navigating");
                         navigate('/home');
                     }
@@ -104,7 +104,7 @@ const SignIn = () => {
     return (<>
         <div id="signinId" >
 
-            <h1>SignIn</h1>
+            <h1 className="signin">SignIn</h1>
             <table cellSpacing="25">
                 <tr>
                     <td className="headinforsignin">Enter Your User Name</td>

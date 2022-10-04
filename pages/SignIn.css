@@ -8,7 +8,6 @@
     height: auto;
 }
 table, tr, td {
-    border: 1px solid white;
     border: none;
 }
 .headinforsignin {
@@ -28,9 +27,9 @@ input {
     border: 1px solid black;
 }
 
-h1 {
+h1 .signin {
     font-family: Simplifica;
-    color: #002B5B;
+    color: White;
     margin-left: 180px;
 }
 

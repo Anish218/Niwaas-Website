@@ -71,14 +71,13 @@ border:1px solid red;
   }
 `;
 export const NavBtnLink = styled(Link)`
-  border-radius: 4px;
-  background: #F8EDE3;
-margin-left:5%;
-  padding: 10px 22px;
-  color: #000000;
-  outline: none;
-  border: none;
-  cursor: pointer;
+  border-radius: 50%;
+width:50px;
+height:50px;
+overflow:hidden;
+
+
+  
   transition: all 0.2s ease-in-out;
   text-decoration: none;
   /* Second Nav */

@@ -13,6 +13,9 @@ import Cart from './pages/Cart';
 import ProtectedRoutes from './ProtectedRoutes';
 import Payment from './pages/Payment';
 import PasswordChange from './pages/PasswordChange';
+import Display from './pages/Display';
+import Bookings from './pages/Bookings';
+import ProtectedRouteForPayment from './ProtectedRouteForPayment';
   
 function App() {
     const mystate = useSelector((state) => state.changeLoginStatus);
@@ -22,8 +25,8 @@ function App() {
       <Navbar />
       <Routes>
               <Route path='/about' exact element={<About/>} />
-              <Route path='/home' index exact element={<Home />} />
-              <Route path='/' exact element={<Home />} />
+              <Route path='/home' index  element={<Home />} />
+              <Route path='/'  exact element={<Home />} />
               <Route path='/sign-in' exact  element={<SignIn/>} />
               <Route path='/sign-up' exact  element={<SignUp />} />
               <Route path='/book-now' exact element={<BookNow />} />
@@ -31,8 +34,10 @@ function App() {
               < Route path='/sign-up' exact  element={<SignUp />} />
               < Route path='/profile' exact element={<ProtectedRoutes Components={Profile} />} />
               < Route path='/cart' exact element={<ProtectedRoutes Components={Cart} />} />
-              < Route path='/payment' exact element={<ProtectedRoutes Components={Payment} />} />
+              < Route path='/payment' exact element={<ProtectedRouteForPayment Components={Payment} />} />
               < Route path='/password' exact element={<ProtectedRoutes Components={PasswordChange} />} />
+              < Route path='/display' exact element={<ProtectedRoutes Components={Display} />} />
+              < Route path='/bookings' exact element={<ProtectedRoutes Components={Bookings} />} />
       </Routes>
       </Router>
      

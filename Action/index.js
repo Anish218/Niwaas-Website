@@ -4,6 +4,18 @@ export const changingStatus = (userStatus,userid,username,accessToken) => {
         payloadOne: userStatus,
         payloadTwo:userid,
         payloadThree: username,
-        payloadFour:accessToken
+        payloadFour: accessToken
+    }
+}
+export const settingbookingid = (bookingidtopay) => {
+    return {
+        type: "CHANGEBOOKINGID",
+        payloadOne: bookingidtopay
+    }
+}
+export const changingwhichbookingidtodisplay = (bookingid) => {
+    return {
+        type: "CHANGEWHICHBOOKINGID",
+        payloadOne: bookingid
     }
 }

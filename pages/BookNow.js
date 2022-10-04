@@ -17,6 +17,7 @@ const BookNow = () => {
     const [selectError, setSelectError] = useState(false);
     const [selectRoomError, setSelectRoomError] = useState(false);
     const [numberErr, setNumberErr] = useState(false);
+    const [checkincheckoutdate, setCheckInCheckOutDate] = useState(false);
     const [noErr, setNoErr] = useState(true);
     let [data, setData] = useState({
         name: "",
@@ -126,7 +127,7 @@ const BookNow = () => {
     const addBookToCart = () => {
         if (mystate.userStatus && mystate.accessToken != "null" && mystate.userid != -1 && data.checkinDate !== ""
             && data.checkoutDate !== "" && data.name.length !== 0 && !containsNumbers(data.name)
-            && data.mobileNumber.length == 10 && data.city !== "" && data.roomInfo.roomType !== "") {
+            && data.mobileNumber.length == 10 && data.city !== "" && data.roomInfo.roomType !== "" && checkincheckoutdate) {
             var date1 = new Date(data.checkinDate); 
             var date2 = new Date(data.checkoutDate); 
             var noOfDays = date2.getTime() - date1.getTime();
@@ -175,9 +176,13 @@ const BookNow = () => {
         }
         else if (data.checkinDate !== ""
             && data.checkoutDate !== "" && data.name.length !== 0 && !containsNumbers(data.name)
-            && data.mobileNumber.length == 10 && data.city !== "" && data.roomInfo.roomType !== "")
+            && data.mobileNumber.length == 10 && data.city !== "" && data.roomInfo.roomType !== "" && checkincheckoutdate)
             navigate('/sign-in');
-        else {}
+        else {
+            if (!checkincheckoutdate) {
+                alert("Check-in Date should be less than Check-out Date");
+            }
+        }
 
     }
     const validate = () => {
@@ -220,6 +225,15 @@ const BookNow = () => {
         }
         else
             setSelectRoomError(false);
+        const date1 = new Date(data.checkinDate);
+        const date2 = new Date(data.checkoutDate);
+        if (date1<date2) {
+            setCheckInCheckOutDate(true);
+            console.log("date");
+        }
+        else {
+            setCheckInCheckOutDate(false);
+        }
 
     };
     console.log(nameError);

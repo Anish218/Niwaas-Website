@@ -1,0 +1,69 @@
+div .displaydiv {
+    width:100%;
+    background-color: black;
+    height: auto;
+}
+.headingdisplay tr{
+    color:white;
+    font-weight:bolder;
+    font-size:larger;
+    padding-bottom:50px;
+}
+
+.valuesdisplay tr {
+    color: white;
+    font-weight:500;
+    font-size:larger;
+} 
+.valuesdisplay{
+    position:absolute;
+    top:40%;
+    left:55%;
+    background-color:black;
+}
+.headingdisplay {
+    background-color: black;
+    position: absolute;
+    top:40%;
+    left:40%;
+}
+.okmessage{
+    height:20px;
+    position:absolute;
+    background-color:black;
+    top:10%;
+    left:50%;
+    display:flex;
+    
+}
+.greentick{
+    border-radius:55%;
+    background-color:black;
+    position:absolute;
+}
+#bookingdone{
+    position:absolute;
+    background-color:black;
+    top:20%;
+    left:27%;
+}
+#bookingdone td h1{
+    text-align:center;
+    padding-top:20px;
+    margin-left:140px;
+    color:green;
+}
+img{
+    border-radius:60%;
+    border-color:green;
+    
+}
+.divforgreentick{
+    top:30%;
+    position:absolute;
+
+   
+}
+
+
+

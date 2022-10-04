@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import './SignIn.css';
 import './Cart.css';
 import { validUserName, validPassword } from '../Regex.js';
 import { useSelector, useDispatch } from "react-redux";
-import { changingStatus } from "../Action/index";
+import { changingStatus, settingbookingid } from "../Action/index";
 import { useNavigate } from "react-router-dom";
-import logo from "../Components/Navbar/logo.png";
 import axios from 'axios';
 
 
 const Cart = () => {
     
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const mystate = useSelector((state) => state.changeLoginStatus);
     const [data, setData] = useState([]);
+    const [payandbook, setPayandbook] = useState(false);
 
 
     useEffect(() => {
@@ -50,10 +51,17 @@ const Cart = () => {
 
         );
     };
+    const payAndBook = (id) => {
+        
+            dispatch(settingbookingid(id));
+            navigate('/payment');
+        
+    };
     return (
+        <>
         <div className="cartdisplaydiv">
             {data.length == 0 ? <h1 id="emptymessage">Your Cart is Empty</h1> :(<><table>
-                <tr class="heading">
+                <tr class="headingcart">
                     <td>Name</td>
                     <td>Mobile Number</td>
                     <td>Check-In Date</td>
@@ -63,24 +71,26 @@ const Cart = () => {
                     <td>Price</td>
                 </tr>
                 {
-                    data.map((item) =>
-                        <tr>
-                            <td>{item.name}</td>
-                            <td>{item.mobilenumber}</td>
-                            <td>{item.checkInDate}</td>
-                            <td>{item.checkOutDate}</td>
-                            <td>{item.city}</td>
-                            <td>{item.roomtype}</td>
-                            <td>{item.price}</td>
-                            <td><button id="cancel" onClick={() => cancelthisbooking(item.id)}>Cancel</button></td>
-                        </tr>
+                        data.map((item) => 
+                            <tr class="valuescart">
+                                <td >{item.name}</td>
+                                <td>{item.mobilenumber}</td>
+                                <td>{item.checkInDate}</td>
+                                <td>{item.checkOutDate}</td>
+                                <td>{item.city}</td>
+                                <td>{item.roomtype}</td>
+                                <td>{item.price}</td>
+                                <td><button id="cancel" onClick={() => cancelthisbooking(item.id)}>Cancel</button></td>
+                                <td><button id="payandbook" onClick={() => payAndBook(item.id)}>Pay and Book</button></td>
+                            </tr>
 
-                    )
+                         )
                 }
                 
             </table>
-            <button className="checkout" onClick={()=>navigate('/payment')}>Checkout</button></>)}
+           </>)}
         </div>
+        </>
     );
 };
 

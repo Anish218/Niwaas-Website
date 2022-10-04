@@ -3,7 +3,7 @@ const initialState = {
     userStatus: false,
     userid:-1,
     username: "null",
-    accessToken:"null"
+    accessToken: "null"
 };
 const changeLoginStatus = (state = initialState, action) => {
     switch (action.type) {
@@ -12,8 +12,8 @@ const changeLoginStatus = (state = initialState, action) => {
             userStatus: action.payloadOne,
             userid: action.payloadTwo,
             username: action.payloadThree,
-            
-            accessToken:action.payloadFour
+            accessToken: action.payloadFour,
+           
         };
         default: return state;
     }
