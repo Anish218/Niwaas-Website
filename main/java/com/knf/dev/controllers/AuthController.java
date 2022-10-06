@@ -2,6 +2,7 @@ package com.knf.dev.controllers;
 
 import com.knf.dev.models.Product;
 import com.knf.dev.request.ChangePasswordRequest;
+import com.knf.dev.request.ForgotPasswordRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -114,6 +115,29 @@ public class AuthController {
 
 		else{
 			return ResponseEntity.badRequest().body(new MessageResponse("Credential are wrong!"));		}
+
+
+		//return ResponseEntity.ok().body(user2);
+		//return new ResponseEntity<List<Product>> productRepository.getById(fetchProduct.getUserid());
+	}
+	@PutMapping ("/setnewpassword")
+	public ResponseEntity<?> setnewpassword(@RequestBody ForgotPasswordRequest forgotPasswordRequest)
+	{
+		//Optional<?> user = userRepository.findByUsername(forgotPasswordRequest.getUsername());
+		//User user2=new User(user.getName(),user.getUsername(),user.getEmail(),user.getPassword(),user.getMobileNumber());
+		if(!userRepository.existsByUsername(forgotPasswordRequest.getUsername())) {
+			return ResponseEntity.notFound().build();
+		}
+			User user=userRepository.getByUsername(forgotPasswordRequest.getUsername());
+		user.setPassword(encoder.encode(forgotPasswordRequest.getNewpassword()));
+		userRepository.save(user);
+		return ResponseEntity.ok(new MessageResponse("Password Updated successfully!"));
+
+
+
+
+		//System.out.println(encoder.matches(forgotPasswordRequest.getOldPassword(),user.getPassword()));
+		//System.out.println(user.getPassword())
 
 
 		//return ResponseEntity.ok().body(user2);
