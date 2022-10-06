@@ -123,7 +123,8 @@ const SignIn = () => {
                    
                   {passworddError && (<><p className="error">*Please provide valid Password!</p></>)}
                     </td>
-                    </tr>
+                </tr>
+                <p id="forgotpassword"  onClick={() => navigate('/forgotpassword')}>Forgot Password?</p>
 
                
                 </table>

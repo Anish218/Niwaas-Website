@@ -11,7 +11,7 @@ table, tr, td {
     border: none;
 }
 .headinforsignin {
-    color: red;
+    color: white;
 }
 footer {
     margin-top: 400px;
@@ -47,15 +47,15 @@ button {
     padding: 0.3rem;
     cursor: pointer;
     border-radius: 5px;
-    color: white;
-    background-color: red;
-    border: 0px solid #002B5B;
+    color: black;
+    background-color: wheat;
+    border: 0px solid wheat;
 }
 
     button:hover {
-        background-color: black;
-        border-color: black;
-        box-shadow: 0 0 10px #719ECE;
+        background-color: wheat;
+        border-color: wheat;
+        box-shadow: 0 0 15px wheat;
     }
     .error
     {
@@ -74,4 +74,14 @@ button {
     top: 613%;
     right: 80%;
     position: absolute;
+}
+#forgotpassword{
+    color:white;
+    margin-left:20px;
+    margin-top:-10px;
+    cursor:pointer;
+    height:1px;
+}
+#forgotpassword:hover{
+    color:red;
 }

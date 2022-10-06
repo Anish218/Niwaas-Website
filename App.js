@@ -16,6 +16,7 @@ import PasswordChange from './pages/PasswordChange';
 import Display from './pages/Display';
 import Bookings from './pages/Bookings';
 import ProtectedRouteForPayment from './ProtectedRouteForPayment';
+import ForgotPassword from './pages/ForgotPassword';
   
 function App() {
     const mystate = useSelector((state) => state.changeLoginStatus);
@@ -38,6 +39,7 @@ function App() {
               < Route path='/password' exact element={<ProtectedRoutes Components={PasswordChange} />} />
               < Route path='/display' exact element={<ProtectedRoutes Components={Display} />} />
               < Route path='/bookings' exact element={<ProtectedRoutes Components={Bookings} />} />
+              < Route path='/forgotpassword' exact element={<ForgotPassword/>} />
       </Routes>
       </Router>
      

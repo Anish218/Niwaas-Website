@@ -28,8 +28,8 @@ input {
         border: 1px solid red;
         box-shadow: 0 0 10px red;
     }
-.headingforsignupdiv{
-    color:red;
+td .headingforsignupdiv {
+    color: white;
 }
 
 button {
@@ -40,15 +40,15 @@ button {
     padding: 0.3rem;
     cursor: pointer;
     border-radius: 5px;
-    color: white;
-    background-color: red;
-    border: 0px solid #002B5B;
+    color: black;
+    background-color: wheat;
+    border: 0px solid wheat;
 }
 
     button:hover {
-        background-color: black;
-        border-color: black;
-        box-shadow: 0 0 10px #719ECE;
+        background-color: wheat;
+        border-color: wheat;
+        box-shadow: 0 0 15px wheat;
     }
     .error
     {

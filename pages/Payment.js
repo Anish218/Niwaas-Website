@@ -25,7 +25,7 @@ const Payment = () => {
 
         // var cost = 0;
         console.log(mystateforboookings.bookingidtopay);
-        fetch("http://localhost:8081/api/auth/bookingdetails/"+ mystateforboookings.bookingidtopay)
+            fetch("http://localhost:8081/api/auth/bookingdetails/"+ mystateforboookings.bookingidtopay)
             .then(response => response.json())
 
             .then(data1 =>

@@ -1,3 +1,4 @@
+
 #bookNowid {
     width: 100%;
     top: 15%;
@@ -11,7 +12,7 @@ table, tr, td {
     
 }
 .headinforbooknow {
-   color : red;
+   color : white;
 }
 Select {
     width: 50px;
@@ -36,22 +37,22 @@ input:focus, Select:focus {
     box-shadow: 0 0 10px red;
 }
 
-button {
+#book {
     margin-top: 20px;
-    width: 30%;
-    height:30px;
+    width: 150%;
+    height: 30px;
     padding: 0.3rem;
     cursor: pointer;
     border-radius: 5px;
-    color: white;
-    background-color: red;
-    border: 0px solid #002B5B;
+    color: black;
+    background-color: wheat;
+    border: 0px solid wheat;
 }
 
-    button:hover {
-        background-color: black;
-        border-color: black;
-        box-shadow: 0 0 10px #719ECE;
+    #book:hover {
+        background-color: wheat;
+        border-color: wheat;
+        box-shadow: 0 0 15px wheat;
     }
 
 .error {

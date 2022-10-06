@@ -24,32 +24,44 @@ const Cart = () => {
                         .then(data1 => setData(data1))
                 }, [])
     
-    console.log(data);
+    console.log("data",data);
     const cancelthisbooking = (id) => {
-        axios.delete("http://localhost:8081/api/auth/deleteproduct/" + id).then(
+        let canceldate = new Date().toLocaleString();
+        canceldate = new Date(canceldate.split(',')[0]);
+        let date1;
+        data.map((item) => date1=item.checkInDate)
+        console.log("cart checkindate", date1);
+        date1 = new Date(date1);
+        //console.log((Number(date1) - Number(canceldate)) / (1000 * 3600 * 24));
+        if ((Number(date1) - Number(canceldate)) / (24*60*60*1000) >= 1.00) {
+            axios.delete("http://localhost:8081/api/auth/deleteproduct/" + id).then(
 
-            (response) => {
+                (response) => {
 
 
 
-                console.log(response.data);
+                    console.log(response.data);
 
-                //alert("You have Signed In successfully!");
-                setData(current =>
-                    current.filter(element => {
-                        return element.id !==id;
-                    }),
-                );
+                    //alert("You have Signed In successfully!");
+                    setData(current =>
+                        current.filter(element => {
+                            return element.id !== id;
+                        }),
+                    );
 
-            }, (error) => {
+                }, (error) => {
 
-                console.log(error);
+                    console.log(error);
 
-                alert("Please Provide Vlaid Credential!");
+                    alert("Please Provide Vlaid Credential!");
 
-            }
+                }
 
-        );
+            );
+        }
+        else {
+            alert("Booking can be cancelled before 24hrs of Check In Date");
+        }
     };
     const payAndBook = (id) => {
         

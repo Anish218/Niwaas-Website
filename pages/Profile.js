@@ -37,6 +37,7 @@ const Profile = () => {
                         <td>Email</td>
                         <td>{data.email}</td>
                     </tr>
+                    <p id="forgotpasswordprofile" onClick={() => navigate('/forgotpassword')}>Forgot Password?</p>
                 </table>
                 <button className="changePassword" onClick={() => navigate('/password')}>Change Password</button>
             </div>

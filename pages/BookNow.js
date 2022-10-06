@@ -125,12 +125,17 @@ const BookNow = () => {
         }
     }
     const addBookToCart = () => {
+        console.log("book checkin date",data.checkinDate);
+        const dated1 = new Date(data.checkinDate);
+        const dated2 = new Date(data.checkoutDate);
         if (mystate.userStatus && mystate.accessToken != "null" && mystate.userid != -1 && data.checkinDate !== ""
             && data.checkoutDate !== "" && data.name.length !== 0 && !containsNumbers(data.name)
-            && data.mobileNumber.length == 10 && data.city !== "" && data.roomInfo.roomType !== "" && checkincheckoutdate) {
-            var date1 = new Date(data.checkinDate); 
+            && data.mobileNumber.length == 10 && data.city !== "" && data.roomInfo.roomType !== "" && dated1<dated2) {
+            var date1 = new Date(data.checkinDate);
             var date2 = new Date(data.checkoutDate); 
+            console.log(date2);
             var noOfDays = date2.getTime() - date1.getTime();
+
 
             // To calculate the no. of days between two dates
             var noOfDays = noOfDays / (1000 * 3600 * 24);
@@ -176,12 +181,10 @@ const BookNow = () => {
         }
         else if (data.checkinDate !== ""
             && data.checkoutDate !== "" && data.name.length !== 0 && !containsNumbers(data.name)
-            && data.mobileNumber.length == 10 && data.city !== "" && data.roomInfo.roomType !== "" && checkincheckoutdate)
+            && data.mobileNumber.length == 10 && data.city !== "" && data.roomInfo.roomType !== "" && dated1 < dated2)
             navigate('/sign-in');
         else {
-            if (!checkincheckoutdate) {
-                alert("Check-in Date should be less than Check-out Date");
-            }
+           
         }
 
     }
@@ -233,6 +236,8 @@ const BookNow = () => {
         }
         else {
             setCheckInCheckOutDate(false);
+            alert("Check-in Date should be less than Check-out Date");
+
         }
 
     };
@@ -252,6 +257,7 @@ const BookNow = () => {
     }
 
     return (
+        
         <div id="bookNowid" >
 
             <h1>Book Now</h1>
@@ -304,11 +310,12 @@ const BookNow = () => {
                     </tr>
 
 
-               <tr> <td><button onClick={(e) => bookRoom(e)}>BookNow</button></td></tr>
+               <tr> <td><button  id="book"onClick={(e) => bookRoom(e)}>BookNow</button></td></tr>
             </table>
 
 
-        </div>
+            </div>
+           
     );
 };
 
