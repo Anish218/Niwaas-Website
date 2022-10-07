@@ -1,10 +1,12 @@
 import './PasswordChange.css';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
 const PasswordChange = () => {
+    const navigate = useNavigate();
     const mystate = useSelector((state) => state.changeLoginStatus);
     const [passwords, setPasswords] = useState({
         oldPassword: "",
@@ -17,6 +19,12 @@ const PasswordChange = () => {
 
             (response) => {
                 alert("password changed Successfully!");
+                setPasswords(existingValues => ({
+                    ...existingValues,
+                    oldPassword: "",
+                    newPassword:"",
+                }))
+                navigate('/profile');
                 console.log(response.data);
 
             }, (error) => {

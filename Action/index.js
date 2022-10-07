@@ -19,3 +19,17 @@ export const changingwhichbookingidtodisplay = (bookingid) => {
         payloadOne: bookingid
     }
 }
+export const changeforgotuserdetails = (forgotuser) => {
+    return {
+        type: "CHANGEFORGOTUSER",
+        payloadOne: forgotuser.username,
+        payloadTwo: forgotuser.newpassword,
+        payloadThree: forgotuser.confirmpassword
+    }
+}
+export const changeotpaccessstatus = (status) => {
+    return {
+        type: "CHANGEOTPACESSSTATUS",
+        payloadOne: status
+    }
+}
