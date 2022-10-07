@@ -60,7 +60,7 @@ const Cart = () => {
             );
         }
         else {
-            alert("Booking can be cancelled before 24hrs of Check In Date");
+            alert("Booking can't be cancelled after 24hrs of Check In Date");
         }
     };
     const payAndBook = (id) => {

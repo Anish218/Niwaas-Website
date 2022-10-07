@@ -40,7 +40,7 @@ const Display = () => {
 
                 <div className="headingdisplay">
                     <tr>Order Id</tr>
-                    <tr>Booked By</tr>
+              
                     <tr>Transaction Id</tr>
                     <tr>Payment Date</tr>
                     <tr>Payment Proof</tr>
@@ -55,7 +55,6 @@ const Display = () => {
                 <div className="valuesdisplay">
                 {Object.keys(data).map(keys => 
                     <>   {keys == "orderid" && (<><tr>{data[keys]}</tr></>)}
-                        {keys == "bookedby" && (<><tr>{data[keys]}</tr></>)}
                         {keys == "transactionid" && (<><tr>{data[keys]}</tr></>)}
                         {keys == "paymentdate" && (<><tr>{data[keys]}</tr></>)}
                         {keys == "paymentproof" && (<><tr>{data[keys]}</tr></>)}

@@ -105,7 +105,7 @@ const SignUp = () => {
 
         console.log(cred);
         if (data.name.length != 0 && !containsNumbers(data.name)
-            && data.email != "" && emailverify.test(data.email) && data.mobileNumber != ""
+            && data.email != "" && emailverify.test(data.email) && data.mobileNumber.length==10
             && data.password != "" && validPassword.test(data.password) && data.username != "" && validUserName.test(data.username)) {
             axios.post("http://localhost:8081/api/auth/signup", cred).then(
 
@@ -115,7 +115,7 @@ const SignUp = () => {
 
                     console.log(response);
 
-                    alert("user signed in Successfully");
+                    alert("user signed up Successfully");
 
                     if (response.status == 200) {
                         console.log("navigating");
@@ -126,7 +126,7 @@ const SignUp = () => {
 
                     console.log(error);
 
-                    alert("Operation failed");
+                    alert(error.response.data.message);
 
                 }
 

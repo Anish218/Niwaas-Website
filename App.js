@@ -17,6 +17,7 @@ import Display from './pages/Display';
 import Bookings from './pages/Bookings';
 import ProtectedRouteForPayment from './ProtectedRouteForPayment';
 import ForgotPassword from './pages/ForgotPassword';
+import Contact from './pages/About';
   
 function App() {
     const mystate = useSelector((state) => state.changeLoginStatus);
@@ -24,8 +25,8 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Routes>
-              <Route path='/about' exact element={<About/>} />
+          <Routes>
+              <Route path='/contact' exact element={<Contact />} />
               <Route path='/home' index  element={<Home />} />
               <Route path='/'  exact element={<Home />} />
               <Route path='/sign-in' exact  element={<SignIn/>} />

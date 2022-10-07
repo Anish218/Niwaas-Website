@@ -83,7 +83,7 @@ const SignIn = () => {
 
                     console.log(error);
 
-                    alert("Please Provide Vlaid Credential!");
+                    alert("Please Provide Valid Credential");
 
                 }
 
