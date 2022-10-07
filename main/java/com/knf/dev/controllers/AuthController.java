@@ -126,7 +126,7 @@ public class AuthController {
 		//Optional<?> user = userRepository.findByUsername(forgotPasswordRequest.getUsername());
 		//User user2=new User(user.getName(),user.getUsername(),user.getEmail(),user.getPassword(),user.getMobileNumber());
 		if(!userRepository.existsByUsername(forgotPasswordRequest.getUsername())) {
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.badRequest().body(new MessageResponse("Username is not correct!"));
 		}
 			User user=userRepository.getByUsername(forgotPasswordRequest.getUsername());
 		user.setPassword(encoder.encode(forgotPasswordRequest.getNewpassword()));
